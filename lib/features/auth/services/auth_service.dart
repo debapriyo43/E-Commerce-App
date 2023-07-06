@@ -8,6 +8,7 @@ class AuthService{
   }) async{
     try{
       User user = User(id: '', name: name, password: password, address: '', type: '', token: '');
+      http.post();
     }catch(e){
       
     }
