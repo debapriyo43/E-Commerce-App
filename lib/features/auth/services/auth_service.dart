@@ -27,6 +27,7 @@ class AuthService {
         body: user.toJson(),
         headers: <String,String>{'Content-Type':'application/json; charset=UTF-8'},
       );
+      debugPrint(res.body);
       httpErrorHandle(response: res, context: context, onSuccess: (){
         showSnackBar(context,'Account created! Login with the same credentials!');
       });
