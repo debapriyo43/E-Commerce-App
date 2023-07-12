@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/features/auth/screens/auth_Screen.dart';
 import 'package:e_commerce_app/features/auth/services/auth_service.dart';
+import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:e_commerce_app/router.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +26,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   final AuthService authService = AuthService();
-  
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    authService.getUserData(context);
   }
 
   @override
@@ -45,7 +47,10 @@ class _MyAppState extends State<MyApp> {
             elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
       ),
       onGenerateRoute: (settings) => genarateRoute(settings),
-      home: const AuthScreen(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? const HomeScreen()
+          : const AuthScreen(),
     );
   }
 }
+
