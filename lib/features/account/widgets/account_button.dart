@@ -31,10 +31,12 @@ class AccountButton extends StatelessWidget {
             text,
             style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.normal),
+                
           ),
           onPressed: onTap,
         ),
       ),
     );
+    debugPrint('Check');
   }
 }
