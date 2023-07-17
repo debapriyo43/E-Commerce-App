@@ -37,6 +37,5 @@ class AccountButton extends StatelessWidget {
         ),
       ),
     );
-    debugPrint('Check');
   }
 }

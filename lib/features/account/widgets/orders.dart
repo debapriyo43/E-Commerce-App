@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/constants/global_variables.dart';
+import 'package:e_commerce_app/features/account/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -11,11 +12,8 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> {
   //temporary list
   List list = [
-    'https://unsplash.com/photos/a-group-of-pink-and-white-leaves-floating-in-the-air--widB6iivrw',
-    'https://unsplash.com/photos/a-group-of-pink-and-white-leaves-floating-in-the-air--widB6iivrw',
-    'https://unsplash.com/photos/a-group-of-pink-and-white-leaves-floating-in-the-air--widB6iivrw',
-    'https://unsplash.com/photos/a-group-of-pink-and-white-leaves-floating-in-the-air--widB6iivrw',
-    'https://unsplash.com/photos/a-group-of-pink-and-white-leaves-floating-in-the-air--widB6iivrw',
+    'https://images.unsplash.com/photo-1689135561940-aa2119cdb9e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80'
+    'https://images.unsplash.com/photo-1682686580433-2af05ee670ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60'
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,6 +22,7 @@ class _OrdersState extends State<Orders> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
             Container(
               padding: EdgeInsets.only(left:15,),
               child: const Text(
@@ -47,8 +46,9 @@ class _OrdersState extends State<Orders> {
         Container(
           height: 170,
           padding: const EdgeInsets.only(left:10,top:20,right:0),
-          child:ListView.builder(itemCount: list.length,itemBuilder: (context,index){
+          child:ListView.builder(scrollDirection: Axis.horizontal,itemCount: list.length,itemBuilder: (context,index){
 
+            return SingleProduct(image: list[index],);
           })
         )
       ],
