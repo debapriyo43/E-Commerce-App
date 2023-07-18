@@ -1,8 +1,7 @@
-import 'package:e_commerce_app/providers/user_provider.dart';
+import 'package:e_commerce_app/features/home/widgets/address_box.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../../constants/global_variables.dart';
+import '../widgets/top_categories.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -15,10 +14,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
@@ -55,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       hintText:'Search Shopnex.in',
                       hintStyle: const TextStyle(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         fontSize:17,
                       )
                     ),
@@ -63,14 +61,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),                // color: Colors.black,
               ),
             ),
+            Container(
+              height:42,
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: Icon(Icons.mic,color: Colors.black,size: 24,),
+              color: Colors.transparent,
+            ),
           ]),
         ),
       ),
-      body:Center(
-        child:Text(
-          user.toJson(),
-        )
-      ),
+      body:Column(children: const [
+        AddressBox(),
+        SizedBox(height: 10,),
+        TopCategories(),
+      ],),
     );
   }
 }
