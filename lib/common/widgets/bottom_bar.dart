@@ -2,7 +2,7 @@ import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/global_variables.dart';
-import '../../features/auth/account_screen.dart';
+import '../../features/account/screens/account_screen.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
@@ -75,7 +75,7 @@ class _BottomBarState extends State<BottomBar> {
               ),
               child: const Icon(Icons.person_outline_outlined),
             ),
-            label: '',
+            label: 'Account',
           ),
           //Cart
           BottomNavigationBarItem(
