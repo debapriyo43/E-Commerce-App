@@ -75,7 +75,7 @@ class _BottomBarState extends State<BottomBar> {
               ),
               child: const Icon(Icons.person_outline_outlined),
             ),
-            label: 'Account',
+            label: '',
           ),
           //Cart
           BottomNavigationBarItem(

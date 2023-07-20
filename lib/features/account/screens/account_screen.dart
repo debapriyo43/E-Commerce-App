@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/global_variables.dart';
-import '../account/widgets/below_app_bar.dart';
-import '../account/widgets/orders.dart';
-import '../account/widgets/top_buttons.dart';
+import '../../../constants/global_variables.dart';
+import '../widgets/below_app_bar.dart';
+import '../widgets/orders.dart';
+import '../widgets/top_buttons.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
