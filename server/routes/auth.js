@@ -5,9 +5,6 @@ const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const auth = require("../middlewares/auth");
 
-// import { findOne } from 'mongoose'; // This help us with the mongoDB functions....
-
-
 
 authRouter.post("/api/signup", async (req, res) => {
   try {
@@ -32,7 +29,6 @@ authRouter.post("/api/signup", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 
-  //post the dareturn ta in database
   //return the data to the user
 });
 

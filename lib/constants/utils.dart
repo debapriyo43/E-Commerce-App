@@ -7,20 +7,20 @@ void showSnackBar(BuildContext context, String text){
     SnackBar(content: Text(text),)
   );}
 
-  Future<List<File>> pickImages()async{
-    List<File>images = [];
-    try{
-      var files = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        type: FileType.image,
-      );
-      if(files!.files.isNotEmpty && files!=null){
-        for(int i=0;i<files.files.length;i++){
-          images.add(File(files.files[i].path!));
-        }
+  Future<List<File>> pickImages() async {
+  List<File> images = [];
+  try {
+    var files = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+      allowMultiple: true,
+    );
+    if (files != null && files.files.isNotEmpty) {
+      for (int i = 0; i < files.files.length; i++) {
+        images.add(File(files.files[i].path!));
       }
-    }catch(e){
-      debugPrint(e.toString());
     }
-    return images;
+  } catch (e) {
+    debugPrint(e.toString());
   }
+  return images;
+}

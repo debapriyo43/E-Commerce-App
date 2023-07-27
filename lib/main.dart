@@ -4,12 +4,15 @@ import 'package:e_commerce_app/features/auth/services/auth_service.dart';
 import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:e_commerce_app/router.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'common/widgets/bottom_bar.dart';
 import 'constants/global_variables.dart';
 
-void main() {
+ Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
@@ -21,7 +24,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState(); 
 }
 
 class _MyAppState extends State<MyApp> {
