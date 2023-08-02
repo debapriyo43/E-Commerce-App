@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
 import 'package:e_commerce_app/features/auth/screens/auth_Screen.dart';
+import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,9 @@ Route<dynamic>genarateRoute(RouteSettings routeSettings){
     return MaterialPageRoute(settings: routeSettings,builder: (_)=>const BottomBar());
     case AddProductScreen.routeName:
     return MaterialPageRoute(settings: routeSettings,builder: (_)=>const AddProductScreen());
+    case CategoryDealsScreen.routeName:
+    var category=routeSettings.arguments as String;
+    return MaterialPageRoute(settings: routeSettings,builder: (_)=> CategoryDealsScreen(category: category,));
     default:
       return MaterialPageRoute(settings: routeSettings,builder: (_)=>const Scaffold(body: Text('Something is going wrong'),));
   }
