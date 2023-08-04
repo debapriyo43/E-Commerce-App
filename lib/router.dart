@@ -5,6 +5,7 @@ import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'common/widgets/bottom_bar.dart';
+import 'features/home/widgets/search/screens/search_screen.dart';
 
 Route<dynamic>genarateRoute(RouteSettings routeSettings){
   switch(routeSettings.name){
@@ -19,6 +20,9 @@ Route<dynamic>genarateRoute(RouteSettings routeSettings){
     case CategoryDealsScreen.routeName:
     var category=routeSettings.arguments as String;
     return MaterialPageRoute(settings: routeSettings,builder: (_)=> CategoryDealsScreen(category: category,));
+    case SearchScreen.routeName:
+    var searchQueary=routeSettings.arguments as String;
+    return MaterialPageRoute(settings: routeSettings,builder: (_)=>SearchScreen(searchQueary: searchQueary,));
     default:
       return MaterialPageRoute(settings: routeSettings,builder: (_)=>const Scaffold(body: Text('Something is going wrong'),));
   }
