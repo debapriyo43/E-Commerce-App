@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/features/home/widgets/address_box.dart';
-import 'package:e_commerce_app/features/home/widgets/search/screens/search_screen.dart';
+import 'package:e_commerce_app/features/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/global_variables.dart';
 import '../widgets/carousel_image.dart';
