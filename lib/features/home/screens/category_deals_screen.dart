@@ -97,7 +97,8 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                                 product.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                              ))
+                              ),
+                              )
                         ],
                       );
                     },
