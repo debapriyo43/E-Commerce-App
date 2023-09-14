@@ -2,7 +2,9 @@ import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
 import 'package:e_commerce_app/features/auth/screens/auth_Screen.dart';
 import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
+import 'package:e_commerce_app/features/product_details/screens/product_details_screen.dart';
 import 'package:e_commerce_app/features/search/screens/search_screen.dart';
+import 'package:e_commerce_app/models/product.dart';
 import 'package:flutter/material.dart';
 
 import 'common/widgets/bottom_bar.dart';
@@ -23,6 +25,9 @@ Route<dynamic>genarateRoute(RouteSettings routeSettings){
     case SearchScreen.routeName:
     var searchQueary=routeSettings.arguments as String;
     return MaterialPageRoute(settings: routeSettings,builder: (_)=>SearchScreen(searchQueary: searchQueary,));
+    case ProductDetailScreen.routeName:
+    var product=routeSettings.arguments as Product;
+    return MaterialPageRoute(settings: routeSettings,builder: (_)=>ProductDetailScreen(product: product,));
     default:
       return MaterialPageRoute(settings: routeSettings,builder: (_)=>const Scaffold(body: Text('Something is going wrong'),));
   }
