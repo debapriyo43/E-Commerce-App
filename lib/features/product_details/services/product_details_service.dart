@@ -19,14 +19,14 @@ class ProductDetailsServices{
     final userProvider = Provider.of<UserProvider>(context,listen:false);
     try{
 
-      http.Response res= await http.post(Uri.parse('$uri/admin/rate-product'),
+      http.Response res= await http.post(Uri.parse('$uri/api/rate-produc'),
       headers: {
         'Content-Type':'application/json;charset=UTF-8',
         'x-auth-token':userProvider.user.token,
       },
       body:jsonEncode({
         'id':product.id!,
-        'rating':rating,
+        'rating':rating, 
     }),
       );
       httpErrorHandle(response: res, context: context, onSuccess: (){});

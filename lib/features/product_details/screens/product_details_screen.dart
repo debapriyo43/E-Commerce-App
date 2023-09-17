@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
+import 'package:e_commerce_app/features/product_details/services/product_details_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -22,6 +23,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  final ProductDetailsServices productDetailsServices=ProductDetailsServices();
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -209,7 +211,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, _) =>
                   const Icon(Icons.star, color: GlobalVariables.secondaryColor),
-              onRatingUpdate: (rating) {},
+              onRatingUpdate: (rating) {
+                productDetailsServices.rateProduct(context: context, product: widget.product, rating: rating);
+              },
             )
           ]),
         ));
