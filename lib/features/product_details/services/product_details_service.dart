@@ -19,6 +19,7 @@ class ProductDetailsServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
+      debugPrint("Function called");
       http.Response res = await http.post(
         Uri.parse('$uri/api/rate-product'),
         headers: {
