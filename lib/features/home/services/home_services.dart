@@ -38,7 +38,8 @@ class HomeServices{
         },
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, e.toString()+"Home Services");
+      print(e.toString());
     }
     return productList;
   }

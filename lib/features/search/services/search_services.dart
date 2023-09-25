@@ -41,7 +41,7 @@ class SearchServices {
         },
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, e.toString()+"Search Services");
     }
     return productList;
   }

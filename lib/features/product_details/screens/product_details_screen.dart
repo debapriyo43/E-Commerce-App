@@ -114,13 +114,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   Container(
                     height: 42,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: Icon(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    color: Colors.transparent,
+                    child: const Icon(
                       Icons.mic,
                       color: Colors.black,
                       size: 24,
                     ),
-                    color: Colors.transparent,
                   ),
                 ]),
           ),
@@ -134,7 +134,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(widget.product.id!),
-                    Stars(rating: avgRating),
+                    Stars(rating: avgRating ),
                   ]),
             ),
             Padding(
@@ -224,10 +224,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
             RatingBar.builder(
-              initialRating: myRating,
+              initialRating: myRating ,
               minRating: 1,
               direction: Axis.horizontal,
-              allowHalfRating: true,
+              allowHalfRating: false,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, _) =>
