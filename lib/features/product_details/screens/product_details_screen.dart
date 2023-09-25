@@ -25,23 +25,26 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final ProductDetailsServices productDetailsServices=ProductDetailsServices();
-  double avgRating=0;
-  double myRating=0;
+  final ProductDetailsServices productDetailsServices =
+      ProductDetailsServices();
+  double avgRating = 0;
+  double myRating = 0;
   @override
   void initState() {
     super.initState();
-    double totalRating=0;
-    for(int i=0;i<widget.product.rating!.length;i++){
-      totalRating+=widget.product.rating![i].rating;
-      if(widget.product.rating![i].userId==Provider.of<UserProvider>(context,listen:false).user.id){
-        myRating=widget.product.rating![i].rating;
+    double totalRating = 0;
+    for (int i = 0; i < widget.product.rating!.length; i++) {
+      totalRating += widget.product.rating![i].rating;
+      if (widget.product.rating![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        myRating = widget.product.rating![i].rating;
       }
     }
-    if(totalRating!=0){
-      avgRating=totalRating/widget.product.rating!.length;
+    if (totalRating != 0) {
+      avgRating = totalRating / widget.product.rating!.length;
     }
   }
+
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -214,7 +217,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               height: 5,
             ),
             const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
                 'Rate The Product',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -230,7 +233,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               itemBuilder: (context, _) =>
                   const Icon(Icons.star, color: GlobalVariables.secondaryColor),
               onRatingUpdate: (rating) {
-                productDetailsServices.rateProduct(context: context, product: widget.product, rating: rating);
+                productDetailsServices.rateProduct(
+                  context: context,
+                  product: widget.product,
+                  rating: rating,
+                );
               },
             )
           ]),

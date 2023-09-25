@@ -35,7 +35,6 @@ productRouter.get("/api/products/search/:name",auth,async(req,res)=>{
 productRouter.post("/api/rate-product",auth,async(req,res)=>{
     
     try{
-        console.log("Function");
         const {id,rating}=req.body;
         
         let product = await Product.findById(id);
