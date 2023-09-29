@@ -23,13 +23,15 @@ class AuthService {
   }) async {
     try {
       User user = User(
-          id: '',
-          name: name,
-          email: email,
-          password: password,
-          address: '',
-          type: '',
-          token: '');
+        id: '',
+        name: name,
+        email: email,
+        password: password,
+        address: '',
+        type: '',
+        token: '',
+        cart: [],
+      );
       http.Response res = await http.post(
         Uri.parse('$uri/api/signup'),
         body: user.toJson(),
@@ -93,25 +95,24 @@ class AuthService {
       if (token == null) {
         prefs.setString('x-auth-token', '');
       }
-      var tokenRes = await http.post(
-        Uri.parse('$uri/tokenIsValid'),
-        headers: <String,String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': token!,
-        }
-      );
+      var tokenRes = await http
+          .post(Uri.parse('$uri/tokenIsValid'), headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': token!,
+      });
       var response = await jsonDecode(tokenRes.body);
-      if(response==true){
+      if (response == true) {
         //get the user data
-        http.Response userRes= await http.get(Uri.parse('$uri/'),headers: <String,String>{
-          'Content-Type':'application/json; charset=UTF-8',
-          'x-auth-token': token,
-        },
+        http.Response userRes = await http.get(
+          Uri.parse('$uri/'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token,
+          },
         );
-        var userProvider = Provider.of<UserProvider>(context,listen: false);
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }
-
     } catch (e) {
       showSnackBar(context, e.toString());
     }

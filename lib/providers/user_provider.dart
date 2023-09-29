@@ -11,11 +11,16 @@ class UserProvider extends ChangeNotifier {
       id: '',
       password: '',
       type: '',
+      cart:[],
       );
       User get user=>_user;
       void setUser(String user){
         _user= User.fromJson(user);
-        print(_user.toString());
+        notifyListeners();
+      }
+
+      void setUserFromModel(User user){
+        _user=user;
         notifyListeners();
       }
 
