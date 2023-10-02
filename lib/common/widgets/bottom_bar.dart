@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text('Cart Page'),
-    ),
+    const CartScreen(),
   ];
   void updatePage(int page) {
     setState(() {
@@ -33,7 +32,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    final userCartLen=context.watch<UserProvider>().user.cart.length;
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
