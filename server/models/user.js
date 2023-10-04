@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { productSchema } = require("./product");
 // const { productSchema } = require("./product");
 
 
@@ -36,7 +37,8 @@ const userSchema = mongoose.Schema({
     //cart
     cart:[
         {
-            product:{type:mongoose.Types.ObjectId,ref:'Product'},
+            // product:{type:mongoose.Types.ObjectId,ref:'Product'},
+            product:productSchema,
             quantity:{
                 type:Number,
                 required:true,

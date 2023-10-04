@@ -1,8 +1,12 @@
+import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/constants/global_variables.dart';
+import 'package:e_commerce_app/features/cart/widgets/cart_product.dart';
 import 'package:e_commerce_app/features/cart/widgets/cart_subtotal.dart';
 import 'package:e_commerce_app/features/home/widgets/address_box.dart';
 import 'package:e_commerce_app/features/search/screens/search_screen.dart';
+import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -18,6 +22,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -96,6 +101,26 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             const AddressBox(),
             const CartSubtotal(),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: CustomButton(
+                text: 'Proceed to buy (${user.cart.length} items)',
+                onTap: () {},
+                color: Colors.yellow[600],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Container(
+              color: Colors.black12.withOpacity(0.08),
+            ),
+            const SizedBox(height: 5),
+            ListView.builder(
+              itemCount: user.cart.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CartProduct(index: index);
+              },
+            ),
           ],
         ),
       ),
