@@ -3,11 +3,13 @@ import 'package:e_commerce_app/common/widgets/custom_textfield.dart';
 import 'package:e_commerce_app/constants/global_variables.dart';
 import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 class AddressScreen extends StatefulWidget {
   static const String routeName = '/address';
-  const AddressScreen({super.key});
+  final String totalAmount;
+  const AddressScreen({super.key, required this.totalAmount});
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -19,6 +21,18 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
+  List<PaymentItem> paymentItems = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    paymentItems.add(PaymentItem(
+        amount: widget.totalAmount,
+        label: 'Total amount',
+        status: PaymentItemStatus.final_price));
+  }
+
+  void onGooglePayResult(res) {}
   @override
   void dispose() {
     // TODO: implement dispos
@@ -61,7 +75,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           address,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
                         ),
@@ -97,13 +111,28 @@ class _AddressScreenState extends State<AddressScreen> {
                       controller: pincodeController,
                       hintText: 'Pincode',
                     ),
+                    const SizedBox(height: 10),
                     CustomTextField(
                       controller: cityController,
                       hintText: 'Town/City',
                     ),
+                    const SizedBox(
+                      height: 10,
+                    )
                   ],
                 ),
               ),
+              GooglePayButton(
+                width: double.infinity,
+                type: GooglePayButtonType.buy,
+                paymentConfigurationAsset: 'gpay.json',
+                onPaymentResult: onGooglePayResult,
+                margin: const EdgeInsets.only(top: 15),
+                paymentItems: paymentItems,
+                loadingIndicator: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
             ],
           ),
         ),
