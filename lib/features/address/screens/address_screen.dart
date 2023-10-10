@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/custom_textfield.dart';
 import 'package:e_commerce_app/constants/global_variables.dart';
+import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
@@ -21,6 +22,7 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
+  String addressToBeUsed = "";
   List<PaymentItem> paymentItems = [];
   @override
   void initState() {
@@ -33,6 +35,29 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   void onGooglePayResult(res) {}
+
+  void payPressed(String addressFromProvider) {
+    addressToBeUsed = "";
+
+    bool isForm = flatBuildingController.text.isNotEmpty ||
+        areaController.text.isNotEmpty ||
+        pincodeController.text.isNotEmpty ||
+        cityController.text.isNotEmpty;
+    if (isForm) {
+      if (_addressFormKey.currentState!.validate()) {
+        addressToBeUsed =
+            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
+      } else {
+        throw Exception('Please enter all the values for the address');
+      }
+    } else if (addressFromProvider.isNotEmpty) {
+      addressToBeUsed = addressFromProvider;
+    } else {
+      showSnackBar(context, 'Error');
+    }
+    debugPrint(addressToBeUsed);
+  }
+
   @override
   void dispose() {
     // TODO: implement dispos
@@ -45,7 +70,7 @@ class _AddressScreenState extends State<AddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var address = '32, Rabindra Nagar 1st Lane P.O- Nimta Kolkata-49';
+    var address = context.watch<UserProvider>().user.address;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -123,6 +148,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
               ),
               GooglePayButton(
+                onPressed: () => payPressed(address),
                 width: double.infinity,
                 type: GooglePayButtonType.buy,
                 paymentConfigurationAsset: 'gpay.json',
