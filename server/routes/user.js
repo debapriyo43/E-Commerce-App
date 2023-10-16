@@ -1,6 +1,6 @@
 const express = require("express");
 const userRouter = express.Router();
-const {Order}=require("../models/order");
+const Order=require("../models/order");
 
 const auth = require("../middlewares/auth");
 const {Product}=require("../models/product");
@@ -100,6 +100,15 @@ userRouter.post('/api/order',auth,async(req,res)=>{
     });
     order = await  order.save();
     res.json(order);
+  }catch(e){
+    res.status(500).json({error:e.message});
+  }
+});
+
+userRouter.get('/api/orders/me',auth,async(req,res)=>{
+  try{
+    let orders=await Order.find({userId:req.user});
+    res.json(orders);
   }catch(e){
     res.status(500).json({error:e.message});
   }
