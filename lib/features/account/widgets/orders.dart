@@ -2,6 +2,7 @@ import 'package:e_commerce_app/common/widgets/loader.dart';
 import 'package:e_commerce_app/constants/global_variables.dart';
 import 'package:e_commerce_app/features/account/services/account_services.dart';
 import 'package:e_commerce_app/features/account/widgets/single_product.dart';
+import 'package:e_commerce_app/features/order_details/screens/order_details.dart';
 import 'package:e_commerce_app/models/order.dart';
 import 'package:flutter/material.dart';
 
@@ -72,8 +73,15 @@ class _OrdersState extends State<Orders> {
                     debugPrint(
                       orders![index].products[0].images[0],
                     );
-                    return SingleProduct(
-                      image: orders![index].products[0].images[0],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, OrderDetailScreen.routeName,
+                            arguments: orders![index]);
+                      },
+                      child: SingleProduct(
+                        image: orders![index].products[0].images[0],
+                      ),
                     );
                   },
                 ),
