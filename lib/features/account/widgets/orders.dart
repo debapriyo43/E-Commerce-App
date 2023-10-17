@@ -18,13 +18,12 @@ class _OrdersState extends State<Orders> {
   final AccountServices accountServices = AccountServices();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchOrders();
   }
 
   void fetchOrders() async {
-    orders = accountServices.fetchMyOrders(context) as List<Order>?;
+    orders = await accountServices.fetchMyOrders(context);
     setState(() {});
   }
 
@@ -38,7 +37,7 @@ class _OrdersState extends State<Orders> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 15,
                     ),
                     child: const Text(
@@ -50,7 +49,7 @@ class _OrdersState extends State<Orders> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       right: 15,
                     ),
                     child: Text(
@@ -64,16 +63,21 @@ class _OrdersState extends State<Orders> {
               ),
               //Display orders
               Container(
-                  height: 170,
-                  padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: orders!.length,
-                      itemBuilder: (context, index) {
-                        return SingleProduct(
-                          image: orders![index].products[0].images[0],
-                        );
-                      }))
+                height: 170,
+                padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: orders!.length,
+                  itemBuilder: (context, index) {
+                    debugPrint(
+                      orders![index].products[0].images[0],
+                    );
+                    return SingleProduct(
+                      image: orders![index].products[0].images[0],
+                    );
+                  },
+                ),
+              ),
             ],
           );
   }
