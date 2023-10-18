@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/constants/global_variables.dart';
+import 'package:e_commerce_app/features/admin/services/admin_services.dart';
 import 'package:e_commerce_app/features/search/screens/search_screen.dart';
+import 'package:e_commerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce_app/models/order.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   static const String routeName = '/order-details';
@@ -19,6 +23,7 @@ class OrderDetailScreen extends StatefulWidget {
 }
 
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
+  final AdminServices adminServices = AdminServices();
   int currentStep = 0;
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
@@ -30,8 +35,22 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     currentStep = widget.order.status;
   }
 
+  //only for admin
+  void changeOrderStatus(int status) {
+    adminServices.changeOrderStatus(
+        context: context,
+        status: status + 1,
+        order: widget.order,
+        onSuccess: () {
+          setState(() {
+            currentStep += 1;
+          });
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -197,20 +216,29 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   )),
                   child: Stepper(
                       currentStep: currentStep,
-                      controlsBuilder: (context, details) => const SizedBox(),
+                      controlsBuilder: (context, details) {
+                        if (user.type == 'admin') {
+                          return CustomButton(
+                            text: 'Done',
+                            onTap: () => changeOrderStatus(details.currentStep),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
                       steps: [
                         Step(
                           title: const Text('Pending'),
                           content: const Text(
                             'Your order is yet to be delivered',
                           ),
-                          isActive: currentStep >= 0,
-                          state: currentStep >= 0
+                          isActive: currentStep > 0,
+                          state: currentStep > 0
                               ? StepState.complete
                               : StepState.indexed,
                         ),
                         Step(
-                          title: const Text('Completed'),
+                          title: const Text('On the way to your door step!'),
                           content: const Text(
                             'Your order has been delivered, you are yet to sign.',
                           ),

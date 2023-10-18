@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/admin/screens/orders_screen.dart';
 import 'package:e_commerce_app/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,19 +17,18 @@ class _AdminScreenState extends State<AdminScreen> {
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
   List<Widget> pages = [
-    PostsScreen(),
+    const PostsScreen(),
     const Center(
       child: Text('Analytics page'),
     ),
-    const Center(
-      child: Text('Order Page'),
-    ),
+    const OrdersScreen(),
   ];
   void updatePage(int page) {
     setState(() {
       _page = page;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
