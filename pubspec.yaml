@@ -37,7 +37,6 @@ dependencies:
   fl_chart: ^0.64.0
   flutter:
     sdk: flutter
-
   flutter_rating_bar: ^4.0.1
   http: ^0.13.6
   intl: ^0.18.1

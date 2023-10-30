@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/common/widgets/loader.dart';
 import 'package:e_commerce_app/features/admin/models/sales.dart';
 import 'package:e_commerce_app/features/admin/services/admin_services.dart';
+import 'package:e_commerce_app/features/admin/widgets/category_products_chart.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsScreen extends StatefulWidget {
@@ -31,16 +32,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Widget build(BuildContext context) {
     return earnings == null || totalSales == null
         ? const Loader()
-        : Column(
-            children: [
-              Text(
-                '\$$totalSales',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+        : Scaffold(
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     '\$$totalSales',
+            //     style: const TextStyle(
+            //       fontSize: 20,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
+            // ),
+            body: CategoryProductsChart(),
           );
   }
 }

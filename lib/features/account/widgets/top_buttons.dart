@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/account/services/account_services.dart';
 import 'package:flutter/material.dart';
 
 import 'account_button.dart';
@@ -10,6 +11,7 @@ class TopButtons extends StatefulWidget {
 }
 
 class _TopButtonsState extends State<TopButtons> {
+  final AccountServices accountServices = AccountServices();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,24 +20,26 @@ class _TopButtonsState extends State<TopButtons> {
           children: [
             AccountButton(
               text: 'Your Orders',
-              onTap: (){},
+              onTap: () {},
             ),
             AccountButton(
               text: 'Turn Seller',
-              onTap: (){},
+              onTap: () {},
             ),
           ],
         ),
-        const SizedBox(height:10,),
+        const SizedBox(
+          height: 10,
+        ),
         Row(
           children: [
             AccountButton(
               text: 'Log Out',
-              onTap: (){},
+              onTap: () => accountServices.logOut(context),
             ),
             AccountButton(
               text: 'Your Wish List',
-              onTap: (){},
+              onTap: () {},
             ),
           ],
         ),
