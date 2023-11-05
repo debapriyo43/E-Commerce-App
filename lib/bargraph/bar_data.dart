@@ -1,35 +1,29 @@
 import 'package:e_commerce_app/bargraph/individual_bar.dart';
 
 class BarData {
-  final double sunAmount;
-  final double monAmount;
+  final double mobiles;
+  final double essentials;
+  final double appliances;
+  final double books;
+  final double fashion;
 
-  final double tueAmount;
-  final double wedAmount;
-  final double thurAmount;
-  final double friAmount;
-  final double satAmount;
-
-  BarData(
-      {required this.sunAmount,
-      required this.monAmount,
-      required this.tueAmount,
-      required this.wedAmount,
-      required this.thurAmount,
-      required this.friAmount,
-      required this.satAmount});
+  BarData({
+    required this.mobiles,
+    required this.essentials,
+    required this.appliances,
+    required this.books,
+    required this.fashion,
+  });
 
   List<IndividualBar> barData = [];
 
   void initializeBarData() {
     barData = [
-      IndividualBar(x: 1, y: sunAmount),
-      IndividualBar(x: 2, y: monAmount),
-      IndividualBar(x: 3, y: tueAmount),
-      IndividualBar(x: 4, y: wedAmount),
-      IndividualBar(x: 5, y: thurAmount),
-      IndividualBar(x: 6, y: friAmount),
-      IndividualBar(x: 7, y: satAmount),
+      IndividualBar(x: 1, y: mobiles),
+      IndividualBar(x: 2, y: essentials),
+      IndividualBar(x: 3, y: appliances),
+      IndividualBar(x: 4, y: books),
+      IndividualBar(x: 5, y: fashion),
     ];
   }
 }

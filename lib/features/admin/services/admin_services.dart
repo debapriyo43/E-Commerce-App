@@ -200,19 +200,19 @@ class AdminServices {
           sales = [
             Sales('Mobiles', response['mobileEarnings']),
             Sales(
-              'Mobiles',
+              'Essentials',
               response['essentialsEarnings'],
             ),
             Sales(
-              'Mobiles',
+              'Appliances',
               response['appliancesEarnings'],
             ),
             Sales(
-              'Mobiles',
+              'Books',
               response['booksEarnings'],
             ),
             Sales(
-              'Mobiles',
+              'Fashion',
               response['fashionEarnings'],
             ),
           ];

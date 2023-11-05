@@ -1,40 +1,40 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:e_commerce_app/bargraph/bar_data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:e_commerce_app/bargraph/bar_data.dart';
 
 class MyBarGraph extends StatelessWidget {
   final List weeklySummary;
+  final int? totalSales;
   const MyBarGraph({
     Key? key,
     required this.weeklySummary,
+    this.totalSales,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     BarData myBarData = BarData(
-        sunAmount: weeklySummary[0],
-        monAmount: weeklySummary[1],
-        tueAmount: weeklySummary[2],
-        wedAmount: weeklySummary[3],
-        thurAmount: weeklySummary[4],
-        friAmount: weeklySummary[5],
-        satAmount: weeklySummary[6]);
-
+      mobiles: weeklySummary[0],
+      essentials: weeklySummary[1],
+      appliances: weeklySummary[2],
+      books: weeklySummary[3],
+      fashion: weeklySummary[4],
+    );
     myBarData.initializeBarData();
     return BarChart(
       BarChartData(
-        maxY: 100,
+        maxY: totalSales?.toDouble(),
         minY: 0,
         gridData: const FlGridData(show: false),
-        borderData: FlBorderData(show: false),
+        borderData: FlBorderData(show: true),
         titlesData: const FlTitlesData(
           show: true,
           topTitles: AxisTitles(
             sideTitles: SideTitles(showTitles: false),
           ),
           leftTitles: AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            sideTitles: SideTitles(showTitles: true),
           ),
           rightTitles: AxisTitles(
             sideTitles: SideTitles(showTitles: false),
@@ -78,45 +78,33 @@ Widget getBottomTitles(double value, TitleMeta meta) {
   switch (value.toInt()) {
     case 1:
       text = const Text(
-        'S',
+        'Mobiles',
         style: style,
       );
       break;
 
     case 2:
       text = const Text(
-        'M',
+        'Essential',
         style: style,
       );
       break;
     case 3:
       text = const Text(
-        'Tu',
+        'Appliances',
         style: style,
       );
       break;
     case 4:
       text = const Text(
-        'W',
+        'Books',
         style: style,
       );
       break;
 
     case 5:
       text = const Text(
-        'Th',
-        style: style,
-      );
-      break;
-    case 6:
-      text = const Text(
-        'F',
-        style: style,
-      );
-      break;
-    case 7:
-      text = const Text(
-        'Sa',
+        'Fashion',
         style: style,
       );
       break;

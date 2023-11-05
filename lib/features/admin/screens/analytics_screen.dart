@@ -24,6 +24,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   getEarnings() async {
     var earningData = await adminServices.getEarnings(context);
     totalSales = earningData['totalEarnings'];
+    debugPrint('$totalSales');
     earnings = earningData['sales'];
     setState(() {});
   }
@@ -33,17 +34,10 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     return earnings == null || totalSales == null
         ? const Loader()
         : Scaffold(
-            // Align(
-            //   alignment: Alignment.center,
-            //   child: Text(
-            //     '\$$totalSales',
-            //     style: const TextStyle(
-            //       fontSize: 20,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            // ),
-            body: CategoryProductsChart(),
+            body: CategoryProductsChart(
+              sales: earnings,
+              totalSales: totalSales,
+            ),
           );
   }
 }
