@@ -29,24 +29,43 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return orders == null
-        ? const Loader()
-        : GridView.builder(
-            itemCount: orders!.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
-            itemBuilder: (context, index) {
-              final orderData = orders![index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, OrderDetailScreen.routeName,
-                      arguments: orderData);
-                },
-                child: SizedBox(
-                  height: 140,
-                  child: SingleProduct(image: orderData.products[0].images[0]),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Orders Page',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 30),
+        orders == null
+            ? const Loader()
+            : Expanded(
+                child: GridView.builder(
+                  itemCount: orders!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (context, index) {
+                    final orderData = orders![index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          OrderDetailScreen.routeName,
+                          arguments: orderData,
+                        );
+                      },
+                      child: SizedBox(
+                        height: 140,
+                        child: SingleProduct(
+                          image: orderData.products[0].images[0],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              );
-            });
+              ),
+      ],
+    );
   }
 }
